@@ -2,198 +2,29 @@
 @section('content')
 <div class="container mx-auto px-4 pt-16">
   <div class="popular-movies">
-    <h2 class="uppercase tracking-wider text-orange-500 text-lg-font-semibold">Popular Movies</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16">
+    @foreach($datos as $valor)
       <div class="mt-8">
         <a href="">
-          <img src="{{url('/')}}/img/movies/movie-1.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
+          <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{$valor['poster_path'] }}" 
+          alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
         </a>
         <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
+          <a href="" class="text-lg mt-2 hover:text-gray-300">{{$valor['title']}}</a>
           <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
+            <img src="{{url('/')}}/img/star.svg" alt="" class="fill-current text-orange-500 w-4">
+            <span class="ml-1">{{$valor['vote_average'] * 10 . '%'  }}</span>
             <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
+            <span>{{ date('Y',strtotime($valor['release_date'])) }}</span>
           </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
+          <div class="text-gray-400 text-sm">
+            @foreach ($valor['genres'] as $genre)
+              <span class="ml-5">{{$genre['name']}}</span>
+            @endforeach
+          </div>
         </div>
       </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-2.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-3.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-4.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-5.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-6.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-7.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-8.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-9.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
-      <div class="mt-8">
-        <a href="">
-          <img src="{{url('/')}}/img/movies/movie-10.jpg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-        </a>
-        <div class="mt-2">
-          <a href="" class="text-lg mt-2 hover:text-gray-300">Jumanji</a>
-          <div class="flex items-center text-gray-400 text-sm mt-1">
-            <svg class="fill-current text-orange-500 w-4" viewbox="0 0 24 24"><g data-name="Layer 2">
-              <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0
-              01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0
-              01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"/></g></svg>
-            <span class="ml-1">85%</span>
-            <span class="mx-2">|</span>
-            <span>Dec 20, 2017</span>
-          </div>
-          <div class="text-gray-400 text-sm">Advcenture, Action, Fantasy</div>
-        </div>
-      </div>
-      <!-- -------------------------------------------------------  -->
+    @endforeach
     </div>
   </div> <!-- end of popular movies -->
 </div>
