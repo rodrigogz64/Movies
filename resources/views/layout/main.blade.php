@@ -9,23 +9,23 @@
 </head>
 <body class="font-sans bg-gray-900 text-white">
   <nav class="border-b border-gray-800">
-    <div class="container mx-auto flex items-center justify-between px-4 py-6">
-      <ul class="flex items-center">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-6">
+      <ul class="flex flex-col md:flex-row items-center">
         <li>
           <a href=""><img src="{{url('/')}}/img/film-reel.svg" alt="" width="30"></a>
         </li>
-        <li class="ml-1">
+        <li class="md:ml-16 mt-3 md:mt-0">
           <a href="" class="hover:text-gray-300">Movies</a>
         </li>
-        <li class="ml-6">
+        <li class="md:ml-6 mt-3 md:mt-0">
           <a href="" class="hover:text-gray-300">TV Shows</a>
         </li>
-        <li class="ml-6">
+        <li class="md:ml-6 mt-3 md:mt-0">
           <a href="" class="hover:text-gray-300">Actors</a>
         </li>
       </ul>
-      <div class="flex items-center">
-        <div class="relative">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="relative mt-3 md:mt-0">
           <input type="text" name="" id="" class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1
           focus:outline-none focus:shadow-outline" placeholder="Search">
         </div>
@@ -35,7 +35,7 @@
           111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z"/>
           </svg>
         </div>
-        <div class="ml-4">
+        <div class="md:ml-4 mt-3 md:mt-0">
           <img src="{{url('/')}}/img/user.svg" alt="" width="30" class="rounded-sm w-8 h-8">
         </div>
       </div>
