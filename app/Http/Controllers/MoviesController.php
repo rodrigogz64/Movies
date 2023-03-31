@@ -13,15 +13,27 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $data = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/76600?api_key=4f82fe3f57fd801c9c601f747057654f')
-        ->json();
-        $data1 = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/550?api_key=4f82fe3f57fd801c9c601f747057654f')
-        ->json();
-        $datos = [$data, $data1];
-        dump($datos);
-        return view('index', ['datos'=> $datos]);
+        //popular Movies
+        $popularmovies = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/tv/popular?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US&page=2')
+        ->json()['results'];
+        //now playing movies
+        $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/movie/now_playing?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US&page=1')
+        ->json()['results'];
+        //Movies Genres
+        $allGenres = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/genre/movie/list?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US')
+        ->json()['genres'];
+
+        $genres = collect($allGenres)->mapWithKeys(function ($idgen){
+            return [$idgen['id']=>$idgen['name']];
+        });
+
+        return view('index', [
+            'popularmovies'=> $popularmovies, 
+            'genres'=>$genres,
+            'nowPlayingMovies'=>$nowPlayingMovies ]);
     }
 
     /**
@@ -45,7 +57,14 @@ class MoviesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //description of each movie
+        $details = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/movie/'. $id .'?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US' .
+        '?append_to_response=credits.videos,images')
+        ->json();
+
+        dump($details);
+        return view('show', ['details'=>$details]);
     }
 
     /**
