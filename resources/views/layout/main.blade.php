@@ -12,10 +12,10 @@
     <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-6">
       <ul class="flex flex-col md:flex-row items-center">
         <li>
-          <a href=""><img src="{{url('/')}}/img/film-reel.svg" alt="" width="30"></a>
+          <a href="{{route('movies.index')}}"><img src="{{url('/')}}/img/film-reel.svg" alt="" width="30"></a>
         </li>
         <li class="md:ml-16 mt-3 md:mt-0">
-          <a href="" class="hover:text-gray-300">Movies</a>
+          <a href="{{route('movies.index')}}" class="hover:text-gray-300">Movies</a>
         </li>
         <li class="md:ml-6 mt-3 md:mt-0">
           <a href="" class="hover:text-gray-300">TV Shows</a>

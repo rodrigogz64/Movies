@@ -1,7 +1,7 @@
 <div class="mt-8">
   <a href="{{route('movies.show', $values['id'])}}">
-      <img src="https://image.tmdb.org/t/p/w500/{{$values['poster_path']}}" alt="Image" class="hover:opacity-75 
-      transition ease-in-out  duration-150 w-full h-72">
+      <img src="https://image.tmdb.org/t/p/w500/{{$values['poster_path']}}" alt="{{$values['name'] ?? $values['title']}}" class="hover:opacity-75 
+      transition ease-in-out  duration-150 w-full h-72 hover:scale-105">
   </a> 
   <div class="mt-2">
     <a href="{{route('movies.show', $values['id'])}}" class="text-lg mt-2 hover:text-gray-300">{{$values['name'] ?? $values['title']}}</a>

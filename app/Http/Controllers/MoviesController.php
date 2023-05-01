@@ -14,24 +14,26 @@ class MoviesController extends Controller
     public function index()
     {
         //popular Movies
-        $popularmovies = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/tv/popular?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US&page=2')
+        $trendingmovies = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/trending/all/day?api_key=4f82fe3f57fd801c9c601f747057654f')
         ->json()['results'];
         //now playing movies
         $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
         ->get('https://api.themoviedb.org/3/movie/now_playing?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US&page=1')
         ->json()['results'];
-        //Movies Genres
+        //Movies Genres id
         $allGenres = Http::withToken(config('services.tmdb.token'))
         ->get('https://api.themoviedb.org/3/genre/movie/list?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US')
         ->json()['genres'];
-
+        //Movies Genres by name
         $genres = collect($allGenres)->mapWithKeys(function ($idgen){
             return [$idgen['id']=>$idgen['name']];
         });
 
+        //dump($trendingmovies);
+        //dump($nowPlayingMovies);
         return view('index', [
-            'popularmovies'=> $popularmovies, 
+            'trendingmovies'=> $trendingmovies, 
             'genres'=>$genres,
             'nowPlayingMovies'=>$nowPlayingMovies ]);
     }
@@ -59,12 +61,23 @@ class MoviesController extends Controller
     {
         //description of each movie
         $details = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/'. $id .'?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US' .
-        '?append_to_response=credits.videos,images')
+        ->get('https://api.themoviedb.org/3/movie/'. $id .'?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US')
         ->json();
+        //cast for each movie
+        $actors = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/movie/'. $id .'/credits?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US')
+        ->json()['cast'];
+        //videos
+        $videos = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/movie/'. $id .'/videos?api_key=4f82fe3f57fd801c9c601f747057654f&language=en-US')
+        ->json()['results'];
 
-        dump($details);
-        return view('show', ['details'=>$details]);
+        //dump($videos);
+
+        return view('show', ['details'=>$details,
+            'actors'=> $actors,
+            'videos'=> $videos
+        ]);
     }
 
     /**

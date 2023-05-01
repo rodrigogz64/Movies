@@ -1,10 +1,11 @@
 @extends('layout.main')
 @section('content')
 
-<div class="movie-info border-b border-gray-800">
+<div class="movie-info border-b border-gray-800 bg-no-repeat bg-cover"
+  style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+  url(https://image.tmdb.org/t/p/w500{{$details['backdrop_path'] ?? null}});">
   <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
-
-    <img src="https://image.tmdb.org/t/p/w500/{{$details['poster_path'] ?? null}}" alt="Image" class="W-64 md:w-96">
+    <img src="https://image.tmdb.org/t/p/w500/{{$details['poster_path'] ?? null}}" class="W-64 md:w-96">
     <div class="md:ml-24">
       <h2 class="text-4xl font-semibold">{{$details['title'] ?? null}}</h2>
       <div class="flex flex-wrap items-center text-gray-400 text-sm mt-1">
@@ -17,9 +18,9 @@
         <span>{{date('d M Y',strtotime($details['release_date'] ?? null))}}</span>
         <span class="mx-2">|</span>
         <span>
-          @foreach ($details['genres'] as $genre)
-            {{$genre['name']}}
-          @endforeach
+            @foreach ($details['genres'] as $genre)
+              {{$genre['name']}}
+            @endforeach
         </span>
       </div>
       <p class="text-gray-300 mt-8">{{$details['overview']}}</p>
@@ -49,58 +50,44 @@
   </div>
 </div><!-- end of movie info -->
 
-<div class="movie-cast border-b border-gray-800">
+<div class="media border-b border-gray-800  mt-8 mb-4">
+  <h2 class="text-4xl font-semibold ml-6">Media</h2> <br>
+    <div class="flex items-center justify-center">
+      @foreach($videos as $values)
+        @if($loop->index < 3)
+          <iframe class="ml-3 mr-3" width="500" height="280" 
+          src="https://www.youtube.com/embed/{{$values['key']}}" allowfullscreen> </iframe>
+        @endif
+      @endforeach
+    </div> <br>
+</div><!-- end of media -->
+
+<div class="movie-cast border-b border-gray-800 mb-8">
   <h2 class="text-4xl font-semibold ml-6 mt-3">Cast</h2>
-  <div class="container mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-  lg:grid-cols-4 gap-16">
-    <div class="mt-2">
-      <a href="">
-        <img src="{{url('/')}}/img/actors/userProfile2.svg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-      </a>
-      <div class="mt-2">
-        <div>
-          <h5 class="text-yellow-100">Character's Name</h5>
-          <h6 class="text-gray-400">Original Name</h6>
+  <div class="flex items-center justify-center">
+    <div class="mr-5 ml-5 mt-5 mb-5 not-prose relative bg-slate-50 rounded-xl overflow-hidden 
+      dark:bg-slate-800/25">
+      <div class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] 
+        dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" 
+        style="background-position: 10px 10px;"></div>
+      <div class="relative rounded-xl overflow-auto">
+        <div class="flex flex-row snap-x overflow-x-auto py-14 scroll-m-10">
+          @foreach($actors as $values)
+            <div class="ml-3 snap-start scroll-ml-6 shrink-0 relative first:pl-6 last:pr-[calc(100%-21.5rem)] mr-3">
+              <img src="https://www.themoviedb.org/t/p/w138_and_h175_face{{$values['profile_path']}}"
+              class="hover:opacity-75 transition ease-in-out  duration-150 w-32 h-44">
+              <div class="mt-2">
+                <div>
+                  <h5 class="text-yellow-100">{{$values['character']}}</h5>
+                  <h6 class="text-gray-400">{{$values['name']}}</h6>
+                </div>
+              </div>
+            </div>
+          @endforeach
+          <div class="absolute inset-0 pointer-events-none border border-black/5 rounded-xl dark:border-white/5 mb-8"></div>
         </div>
       </div>
     </div>
-    <!-- -------------------------------------------------------  -->
-    <div class="mt-2">
-      <a href="">
-        <img src="{{url('/')}}/img/actors/userProfile4.svg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-      </a>
-      <div class="mt-2">
-        <div>
-          <h5 class="text-yellow-100">Character's Name</h5>
-          <h6 class="text-gray-400">Original Name</h6>
-        </div>
-      </div>
-    </div>
-    <!-- -------------------------------------------------------  -->
-    <div class="mt-2">
-      <a href="">
-        <img src="{{url('/')}}/img/actors/userProfile.svg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-      </a>
-      <div class="mt-2">
-        <div>
-          <h5 class="text-yellow-100">Character's Name</h5>
-          <h6 class="text-gray-400">Original Name</h6>
-        </div>
-      </div>
-    </div>
-    <!-- -------------------------------------------------------  -->
-    <div class="mt-2">
-      <a href="">
-        <img src="{{url('/')}}/img/actors/userProfile3.svg" alt="" class="hover:opacity-75 transition ease-in-out  duration-150">
-      </a>
-      <div class="mt-2">
-        <div>
-          <h5 class="text-yellow-100">Character's Name</h5>
-          <h6 class="text-gray-400">Original Name</h6>
-        </div>
-      </div>
-    </div>
-    <!-- -------------------------------------------------------  -->
   </div>
 </div><!-- end of movie cast -->
 
